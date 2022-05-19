@@ -1,9 +1,8 @@
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 # khoi tao app 
 app = FastAPI()
-
 
 # tao hai duong url 
 # root
@@ -16,8 +15,6 @@ def read_root():
 def read_item(item_id: int):
     return {"so_item": item_id}
 
-# log 
-
 # tra ve gia tri so 
 @app.get("/number/{num}")
 def get_number(num: int ):
@@ -29,4 +26,10 @@ def kiem_tra_chan_le(so: int):
     if so % 2 == 0: return f"So {so} la so chan"
     return f"So {so} la so le!"
 
+@app.get("/saleof100")
+def getIPFromClient(request: Request):
+    client_ip = request.client.host
+    return {"Client_ip": client_ip}
 
+
+    
