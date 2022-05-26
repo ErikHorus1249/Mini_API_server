@@ -1,5 +1,6 @@
 from typing import Optional
 from fastapi import FastAPI, Request
+from Gmail.Mail import *
 
 # khoi tao app 
 app = FastAPI()
@@ -31,5 +32,8 @@ def getIPFromClient(request: Request):
     client_ip = request.client.host
     return {"Client_ip": client_ip}
 
+@app.post("/send_email")
+def send_email_to_everyone(content: str, receiver: str, subject: str):
+    return send_email(content, receiver, subject)  
 
     
